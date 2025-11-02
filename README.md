@@ -1,4 +1,4 @@
-# 🛡️ Effort-AIGI Deepfake Detection System
+# 🛡️ Real-time Live-streaming Deepfake Detection System
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8.0-red.svg)](https://pytorch.org/)
@@ -86,7 +86,7 @@ A real-time deepfake detection system with browser extension support for YouTube
 ## 📁 File Structure
 
 ```
-Effort-AIGI-Detection/
+RealTime-LiveStreaming-DeepfakeDetection-AIGI/
 │
 ├── README.md                          # This file
 ├── requirements.txt                   # Python dependencies
@@ -517,7 +517,7 @@ If landmark detection fails, system automatically falls back to bounding box cro
 - **websockets**: Real-time communication
 
 ### Development
-- **Project**: Effort-AIGI Deepfake Detection System
+- **Project**: Real-time Live-streaming Deepfake Detection System
 - **Date**: November 2025
 
 ---
