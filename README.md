@@ -14,7 +14,7 @@ A real-time deepfake detection system with browser extension support for YouTube
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
 - [Configuration](#-configuration)
-- [Usage Modes](#-usage-modes)
+- [Usage](#-usage)
 - [Browser Extension](#-browser-extension)
 - [Important Notes](#-important-notes)
 - [Troubleshooting](#-troubleshooting)
@@ -36,9 +36,6 @@ A real-time deepfake detection system with browser extension support for YouTube
 - **Draggable UI**: Floating badge can be moved anywhere on screen
 
 ### Flexibility
-- **Two Variants**: 
-  - Standard server
-  - No-Conversion server
 - **Preprocessing**: Automatic face extraction and saving
 
 ---
@@ -95,8 +92,7 @@ RealTime-LiveStreaming-DeepfakeDetection-AIGI/
 ├── DeepfakeBench/                    # Main detection framework
 │   ├── __init__.py
 │   ├── training/
-│   │   ├── demo_server.py            # CLI server (with conversion)
-│   │   ├── demo_server_no_conversion.py  # CLI server (no conversion)
+│   │   ├── demo_server.py            # CLI server
 │   │   ├── test.py                   # Testing utilities
 │   │   ├── train.py                  # Training utilities
 │   │   │
@@ -123,13 +119,11 @@ RealTime-LiveStreaming-DeepfakeDetection-AIGI/
 │   │
 │   └── saves_pipeline/
 │       └── preprocessed_faces/       # Saved face extractions
-│           ├── unknown/              # Standard server
-│           └── no_conversion/        # No-conversion server
+│           └── unknown/              # Saved faces directory
 │
 ├── native_host/                      # WebSocket servers
 │   ├── __init__.py
-│   ├── server.py                     # WebSocket (with conversion)
-│   └── server_no_conversion.py       # WebSocket (no conversion)
+│   └── server.py                     # WebSocket server
 │
 ├── extension/                        # Chrome/Edge extension
 │   ├── manifest.json                 # Extension configuration
@@ -159,13 +153,7 @@ RealTime-LiveStreaming-DeepfakeDetection-AIGI/
 
 ### Step 1: Setup Project
 
-Navigate to your project directory:
-
-```bash
-cd "d:\College Projects\PBS\Now its Final\Effort-AIGI-Detection - Copy - Copy"
-```
-
-Or clone from your repository if you've already pushed it:
+clone from your repository if you've already pushed it:
 
 ```bash
 git clone https://github.com/Kishor-04/RealTime-LiveStreaming-DeepfakeDetection-AIGI.git
@@ -296,31 +284,16 @@ Uses majority voting from 3 models:
 
 ---
 
-## 🎯 Usage Modes
+## 🎯 Usage
 
-### Mode 1: Standard Server
+### Standard Server
 
 **Files**: `server.py`, `demo_server.py`
 
 **Use Cases**:
-- General deepfake detection
+- Real-time deepfake detection
+- YouTube video analysis
 - Balanced accuracy
-
-### Mode 2: No-Conversion Server
-
-**Files**: `server_no_conversion.py`, `demo_server_no_conversion.py`
-
-**Use Cases**:
-- Stricter detection
-- Comparison testing
-- Research purposes
-
-**Start command**:
-```bash
-python native_host/server_no_conversion.py \
-  --weights DeepfakeBench/training/weights/effort_clip_L14_trainOn_FaceForensic.pth \
-  --landmark_model DeepfakeBench/preprocessing/shape_predictor_68_face_landmarks.dat
-```
 
 ---
 
@@ -409,13 +382,6 @@ If landmark detection fails, system automatically falls back to bounding box cro
    - Saved to `saves_pipeline/preprocessed_faces/`
    - Can grow large over time
    - Periodically clean if needed
-
-### Server Variants Comparison
-
-| Feature | Standard | No-Conversion |
-|---------|----------|---------------|
-| Saved faces dir | `unknown/` | `no_conversion/` |
-| Use case | General | Strict/Research |
 
 ---
 
@@ -527,11 +493,8 @@ If landmark detection fails, system automatically falls back to bounding box cro
 ### Essential Commands
 
 ```bash
-# Start standard server
+# Start server
 python native_host/server.py --weights <path> --landmark_model <path>
-
-# Start no-conversion server
-python native_host/server_no_conversion.py --weights <path> --landmark_model <path>
 
 # CLI testing
 python DeepfakeBench/training/demo_server.py --weights <path> --landmark_model <path>
